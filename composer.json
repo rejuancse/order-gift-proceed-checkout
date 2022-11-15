@@ -1,0 +1,19 @@
+{
+    "name": "asus/WCGT-Gift-Proceed",
+    "type": "wordpress-plugin",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "rejuancse",
+            "email": "rejuan.17bd@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "WCGT\\WC_Gift_Proceed\\": "includes/"
+        },
+        "files": []
+    }
+}
