@@ -107,7 +107,7 @@ final class WC_Gift {
      */
     public function init_plugin() {
         if ( is_admin() ) {
-            new WCGT\WC_Gift_Proceed\Admin();
+            require_once WCGT_DIR_PATH.'includes/Admin.php';
         } else {
             new WCGT\WC_Gift_Proceed\Frontend();
         }
