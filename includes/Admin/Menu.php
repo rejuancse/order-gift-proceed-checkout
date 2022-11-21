@@ -20,11 +20,11 @@ class Menu {
      * @return void
      */  
     public function admin_menu() {
-        $parent_slug = 'WCGT-academy';
+        $parent_slug = 'wcgt';
         $capability = 'manage_options';
-        add_menu_page( __('weDevs WC_Gift_Proceed', 'WCGT-academy'),  __('WC_Gift_Proceed', 'WCGT-academy'), $capability, $parent_slug, [ $this, 'addressbook_page'], 'dashicons-welcome-learn-more' );
-        add_submenu_page( $parent_slug, __('Address Book', 'WCGT-academy'), __('Address Book', 'WCGT-academy'), $capability, $parent_slug, [ $this, 'addressbook_page' ] );
-        add_submenu_page( $parent_slug, __('Settings', 'WCGT-academy'), __('Settings', 'WCGT-academy'), $capability, 'WCGT-settings', [ $this, 'addressbook_settings' ] );
+        add_menu_page( __('weDevs WC_Gift_Proceed', 'wcgt'),  __('WC_Gift_Proceed', 'wcgt'), $capability, $parent_slug, [ $this, 'addressbook_page'], 'dashicons-welcome-learn-more' );
+        add_submenu_page( $parent_slug, __('Address Book', 'wcgt'), __('Address Book', 'wcgt'), $capability, $parent_slug, [ $this, 'addressbook_page' ] );
+        add_submenu_page( $parent_slug, __('Settings', 'wcgt'), __('Settings', 'wcgt'), $capability, 'wcgt-settings', [ $this, 'addressbook_settings' ] );
     }
 
     /**

@@ -99,6 +99,7 @@ if (! class_exists('Initial_Setup')) {
                     padding: 0;
                 }
             </style>
+            
             <script type="text/javascript">
                 jQuery(document).ready(function($){
                     'use strict';
@@ -148,7 +149,7 @@ if (! class_exists('Initial_Setup')) {
                                 __('installed and activated on this website in order to use WooCommerce Gift Proceed Checkout.','wcgt')
                             );
                         ?>
-                        <a href="https://docs.themeum.com/wp-crowdfunding/" target="_blank"><?php _e('Learn more about WooCommerce Gift Proceed Checkout', 'wcgt'); ?></a>
+                        <a href="#" target="_blank"><?php _e('Learn more about WooCommerce Gift Proceed Checkout', 'wcgt'); ?></a>
                     </div>
                     <div class="wcgt-install-notice-button">
                         <a  class="button button-primary" href="<?php echo add_query_arg(array('action' => 'activate_woocommerce_free'), admin_url()); ?>"><?php _e('Activate WooCommerce', 'wcgt'); ?></a>
@@ -178,7 +179,7 @@ if (! class_exists('Initial_Setup')) {
                                 __('installed and activated on this website in order to use WooCommerce Gift Proceed Checkout.','wcgt')
                             );
                         ?>
-                        <a href="https://docs.themeum.com/wp-crowdfunding/" target="_blank"><?php _e('Learn more about WooCommerce Gift Proceed Checkout', 'wcgt'); ?></a>
+                        <a href="#" target="_blank"><?php _e('Learn more about WooCommerce Gift Proceed Checkout', 'wcgt'); ?></a>
                     </div>
                     <div class="wcgt-install-notice-button">
                         <a class="install-wcgt-button button button-primary" data-slug="woocommerce" href="<?php echo add_query_arg(array('action' => 'install_woocommerce_free'), admin_url()); ?>"><?php _e('Install WooCommerce', 'wcgt'); ?></a>

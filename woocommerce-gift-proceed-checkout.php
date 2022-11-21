@@ -98,7 +98,6 @@ final class WC_Gift {
                 add_action( 'admin_notices', array($initial_setup, 'free_plugin_not_installed') );
             }
         }
-        
 	}
 
     /**
@@ -153,7 +152,6 @@ if (!function_exists('wcgt_function')) {
         return new \WCGT\Functions();
     }
 }
-
 
 // kick-off the plugin
 WCGT_Gift_Proceed();
