@@ -13,5 +13,4 @@ class Functions {
             update_option($option_name, $option_value);
         }
     }
-
 }

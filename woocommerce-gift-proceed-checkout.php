@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       WooCommerce Gift Proceed Checkout
  * Description:       Handle the basics with this plugin.
- * Version:           1.0
+ * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            Rejuan Ahamed
@@ -38,9 +38,9 @@ final class WC_Gift {
         $this->includes_core();
         $this->initial_activation();
 
-        do_action('wcgt_before_load');
-		$this->run();
-		do_action('wcgt_after_load');
+        // do_action('wcgt_before_load');
+		// $this->run();
+		// do_action('wcgt_after_load');
 
         register_activation_hook( __FILE__, [ $this, 'activate' ] );
         add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
@@ -69,12 +69,10 @@ final class WC_Gift {
     public function define_constants() {
         define( 'WC_GIFT_VERSION', self::version );
         define( 'WC_GIFT_FILE', __FILE__ );
-        define( 'WC_GIFT_PATH', __DIR__ );
         define( 'WC_GIFT_URL', plugins_url( '', WC_GIFT_FILE ) );
         define( 'WC_GIFT_ASSETS', WC_GIFT_URL . '/assets' );
         define('WCGT_DIR_URL', plugin_dir_url( WC_GIFT_FILE ));
         define('WCGT_DIR_PATH', plugin_dir_path( WC_GIFT_FILE ));
-        define('WCGT_BASENAME', plugin_basename( WC_GIFT_FILE ));
     }
 
     public function includes_core() {
