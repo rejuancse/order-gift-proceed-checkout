@@ -36,14 +36,13 @@ final class WC_Gift {
     private function __construct() {
         $this->define_constants();
         $this->includes_core();
-        // $this->initial_activation();
+        $this->initial_activation();
 
         do_action('wcgt_before_load');
 		$this->run();
 		do_action('wcgt_after_load');
 
         register_activation_hook( __FILE__, [ $this, 'activate' ] );
-
         add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
     }
 
@@ -128,7 +127,6 @@ final class WC_Gift {
         update_option( 'wc_gift_proceed_version', WC_GIFT_VERSION );
     }
 
-
     // Activation & Deactivation Hook
 	public function initial_activation() {
 		$initial_setup = new \WCGT\WC_Gift_Proceed\Initial_Setup();
@@ -148,8 +146,8 @@ function WCGT_Gift_Proceed() {
 
 if (!function_exists('wcgt_function')) {
     function wcgt_function() {
-        require_once WPCF_DIR_PATH . 'includes/Functions.php';
-        return new \WCGT\Functions();
+        require_once WCGT_DIR_PATH . 'includes/Functions.php';
+        return new \WCGT\WC_Gift_Proceed\Functions();
     }
 }
 

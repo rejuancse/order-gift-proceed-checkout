@@ -36,7 +36,7 @@ if (! class_exists('Initial_Setup')) {
                 'post_type'     => 'page',
                 'post_status'   => 'publish',
             );
-        
+
             /**
              * Insert the page into the database
              * @Gift Pages Object
@@ -46,7 +46,6 @@ if (! class_exists('Initial_Setup')) {
                 wcgt_function()->update_text( 'gift_page_id', $form_page );
             }
         }
-
 
         /**
          * Reset method, the ajax will call that method for Reset Settings
@@ -215,15 +214,8 @@ if (! class_exists('Initial_Setup')) {
                     'short_description' => false,
                     'sections' => false,
                     'requires' => false,
-                    'rating' => false,
-                    'ratings' => false,
-                    'downloaded' => false,
                     'last_updated' => false,
-                    'added' => false,
-                    'tags' => false,
                     'compatibility' => false,
-                    'homepage' => false,
-                    'donate_link' => false,
                 ),
             ) );
     
