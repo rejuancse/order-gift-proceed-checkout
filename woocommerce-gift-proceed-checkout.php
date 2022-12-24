@@ -38,12 +38,13 @@ final class WC_Gift {
         $this->includes_core();
         $this->initial_activation();
 
-        // do_action('wcgt_before_load');
-		// $this->run();
-		// do_action('wcgt_after_load');
+        do_action('wcgt_before_load');
+		$this->run();
+		do_action('wcgt_after_load');
 
         register_activation_hook( __FILE__, [ $this, 'activate' ] );
         add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
+        add_action('wp_enqueue_scripts', [ $this, 'frontend_script' ]); //Add frontend js and css
     }
 
     /**
@@ -131,6 +132,19 @@ final class WC_Gift {
 		register_activation_hook( WC_GIFT_FILE, array( $initial_setup, 'initial_plugin_activation' ) );
 		register_deactivation_hook( WC_GIFT_FILE , array( $initial_setup, 'initial_plugin_deactivation' ) );
 	}
+
+    /**
+     * Registering necessary js and css
+     * @ Frontend
+     */
+    public function frontend_script(){
+        wp_enqueue_style( 'wcgt-css-front', WCGT_DIR_URL .'assets/build/css/main.css', false, WC_GIFT_VERSION );
+         
+        #JS
+        wp_enqueue_script( 'jquery' );
+        wp_enqueue_script( 'wp-wcgt-front', WCGT_DIR_URL .'assets/build/js/main.js', array('jquery'), WC_GIFT_VERSION, true);
+        wp_enqueue_media(); 
+    }
 }
 
 /**
@@ -151,3 +165,16 @@ if (!function_exists('wcgt_function')) {
 
 // kick-off the plugin
 WCGT_Gift_Proceed();
+
+
+// function ts_disable_all_but_cod( $available_payment_gateways ) {
+//     $user = wp_get_current_user();
+//     $allowed_roles = array('customer','subscriber', 'admin');
+//     if (!array_intersect($allowed_roles, $user->roles )) {        
+//         if (isset($available_payment_gateways['cod'])) {
+//             unset($available_payment_gateways['cod']);
+//         }      
+//     }
+//     return $available_payment_gateways;
+// }
+// add_filter('woocommerce_available_payment_gateways', 'ts_disable_all_but_cod', 90, 1);

@@ -8,14 +8,14 @@ if (! class_exists('Initial_Setup')) {
     class Initial_Setup {
 
         public function __construct() {
-            add_action('wp_ajax_install_woocommerce_plugin',        array($this, 'install_woocommerce_plugin'));
-            add_action('admin_action_activate_woocommerce_free',    array($this, 'activate_woocommerce_free'));
-            add_action('woocommerce_after_cart_totals',    array($this, 'custom_add_to_cart_redirect'));
+            add_action('wp_ajax_install_woocommerce_plugin',     array($this, 'install_woocommerce_plugin'));
+            add_action('admin_action_activate_woocommerce_free', array($this, 'activate_woocommerce_free'));
+            add_action('woocommerce_after_cart_totals', array($this, 'custom_add_to_cart_redirect'));
         }
         
         public function custom_add_to_cart_redirect() {
             echo '<button class="checkout-button button alt wc-forward wp-element-button">
-                <a href="'. get_site_url().'/gift-proceed" class="color:white">Order as a Gift</a>
+                <a href="'. get_site_url().'/gift-proceed/" class="color:white">'.__('Order as a Gift', 'wcgt').'</a>
             </button>';
         }
 
@@ -23,7 +23,24 @@ if (! class_exists('Initial_Setup')) {
          * Do some task during plugin activation
          */
         public function initial_plugin_activation() {
+            if(get_option('wcgt_proceed_order')) {
+                return false;
+            }
+            self::update_option();
             self::insert_page();
+        }
+
+        /**
+         * Insert settings option data
+         */
+        public function update_option() {
+            $init_setup_data = array (
+                'wcgt_proceed_order' => WC_GIFT_VERSION
+            );
+
+            foreach ($init_setup_data as $key => $value ) {
+                update_option( $key , $value );
+            }
         }
 
         /**
@@ -191,7 +208,7 @@ if (! class_exists('Initial_Setup')) {
 
         public function activate_woocommerce_free() {
             activate_plugin('woocommerce/woocommerce.php' );
-            wp_redirect(admin_url('admin.php?page=woocommerce-gift-proceed-checkout'));
+            wp_redirect(admin_url('admin.php?page=wc-settings&tab=settings-gift-proceed'));
 		    exit();
         }
 
@@ -209,13 +226,13 @@ if (! class_exists('Initial_Setup')) {
             $plugin = 'woocommerce';
     
             $api = plugins_api( 'plugin_information', array(
-                'slug' => $plugin,
-                'fields' => array(
+                'slug'      => $plugin,
+                'fields'    => array(
                     'short_description' => false,
-                    'sections' => false,
-                    'requires' => false,
-                    'last_updated' => false,
-                    'compatibility' => false,
+                    'sections'          => false,
+                    'requires'          => false,
+                    'last_updated'      => false,
+                    'compatibility'     => false,
                 ),
             ) );
     
