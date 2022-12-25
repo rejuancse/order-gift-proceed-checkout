@@ -82,18 +82,20 @@ final class WC_Gift {
 
     //Checking Vendor
 	public function run() {
-        $initial_setup = new \WCGT\WC_Gift_Proceed\Initial_Setup();
-        
-        $wcgt_file = WP_PLUGIN_DIR.'/woocommerce/woocommerce.php';
-
-        if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-
-        } else {
+        if ( is_admin() ) {
+            $initial_setup = new \WCGT\WC_Gift_Proceed\Initial_Setup();
+            
             $wcgt_file = WP_PLUGIN_DIR.'/woocommerce/woocommerce.php';
-            if (file_exists($wcgt_file) ) {
-                add_action( 'admin_notices', array($initial_setup, 'free_plugin_installed_but_inactive_notice') );
-            } elseif ( ! file_exists($wcgt_file) ) {
-                add_action( 'admin_notices', array($initial_setup, 'free_plugin_not_installed') );
+
+            if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+
+            } else {
+                $wcgt_file = WP_PLUGIN_DIR.'/woocommerce/woocommerce.php';
+                if (file_exists($wcgt_file) ) {
+                    add_action( 'admin_notices', array($initial_setup, 'free_plugin_installed_but_inactive_notice') );
+                } elseif ( ! file_exists($wcgt_file) ) {
+                    add_action( 'admin_notices', array($initial_setup, 'free_plugin_not_installed') );
+                }
             }
         }
 	}
