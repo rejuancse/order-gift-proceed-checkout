@@ -167,16 +167,3 @@ if (!function_exists('wcgt_function')) {
 
 // kick-off the plugin
 WCGT_Gift_Proceed();
-
-
-// function ts_disable_all_but_cod( $available_payment_gateways ) {
-//     $user = wp_get_current_user();
-//     $allowed_roles = array('customer','subscriber', 'admin');
-//     if (!array_intersect($allowed_roles, $user->roles )) {        
-//         if (isset($available_payment_gateways['cod'])) {
-//             unset($available_payment_gateways['cod']);
-//         }      
-//     }
-//     return $available_payment_gateways;
-// }
-// add_filter('woocommerce_available_payment_gateways', 'ts_disable_all_but_cod', 90, 1);

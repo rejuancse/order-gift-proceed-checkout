@@ -11,6 +11,7 @@ if (! class_exists('Initial_Setup')) {
             add_action('wp_ajax_install_woocommerce_plugin',     array($this, 'install_woocommerce_plugin'));
             add_action('admin_action_activate_woocommerce_free', array($this, 'activate_woocommerce_free'));
             add_action('woocommerce_after_cart_totals', array($this, 'custom_add_to_cart_redirect'));
+            // add_action('woocommerce_available_payment_gateways', array($this, 'wcgt_disable_all_but_cod'));
         }
         
         public function custom_add_to_cart_redirect() {
@@ -152,7 +153,7 @@ if (! class_exists('Initial_Setup')) {
             <div class="notice notice-error wcgt-install-notice">
                 <div class="wcgt-install-notice-inner">
                     <div class="wcgt-install-notice-icon">
-                        <img src="<?php echo Wcgt_DIR_URL.'assets/images/woocommerce-icon.png'; ?>" alt="logo" />
+                        <img src="<?php echo WC_GIFT_URL.'/assets/src/images/gift-card.png'; ?>" alt="logo" />
                     </div>
                     <div class="wcgt-install-notice-content">
                         <h2><?php _e('Thanks for using WooCommerce Gift Proceed Checkout', 'wcgt'); ?></h2>
@@ -182,7 +183,7 @@ if (! class_exists('Initial_Setup')) {
             <div class="notice notice-error wcgt-install-notice">
                 <div class="wcgt-install-notice-inner">
                     <div class="wcgt-install-notice-icon">
-                        <img src="<?php echo Wcgt_DIR_URL.'assets/images/woocommerce-icon.png'; ?>" alt="logo" />
+                        <img src="<?php echo WC_GIFT_URL.'/assets/src/images/gift-card.png'; ?>" alt="logo" />
                     </div>
                     <div class="wcgt-install-notice-content">
                         <h2><?php _e('Thanks for using WooCommerce Gift Proceed Checkout', 'wcgt'); ?></h2>
@@ -257,6 +258,17 @@ if (! class_exists('Initial_Setup')) {
                 __('WooCommerce','wcgt'), 
                 __('version is below then 3.0, please update.','wcgt') 
             );
+        }
+
+        function wcgt_disable_all_but_cod( $available_payment_gateways ) {
+            $user = wp_get_current_user();
+            $allowed_roles = array('customer','subscriber', 'admin');
+            if (!array_intersect($allowed_roles, $user->roles )) {        
+                if (isset($available_payment_gateways['cod'])) {
+                    unset($available_payment_gateways['cod']);
+                }      
+            }
+            return $available_payment_gateways;
         }
     }
 }
