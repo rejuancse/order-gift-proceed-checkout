@@ -1,18 +1,21 @@
 /*!******************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/scss/app.scss ***!
   \******************************************************************************************************************************************************/
-#customer_details {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.wcgt-form #customer_details {
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  columns: 2;
 }
-
-.woocommerce-billing-fields h3 {
+.wcgt-form #customer_details .col-1,
+.wcgt-form #customer_details .col-2 {
+  width: 100%;
+}
+.wcgt-form #customer_details .col-1 h3,
+.wcgt-form #customer_details .col-2 h3 {
   font-size: 40px;
   margin: 0;
 }
-
-#ship-to-different-address {
+.wcgt-form #ship-to-different-address {
   display: none;
 }
 

@@ -1,14 +1,18 @@
-#customer_details {
-    display: flex;
-}
+.wcgt-form {
+    #customer_details {
+        columns: 2;
+        .col-1,
+        .col-2 {
+            width: 100%;
 
-.woocommerce-billing-fields {
-    h3 {
-        font-size: 40px;
-        margin: 0;
+            h3 {
+                font-size: 40px;
+                margin: 0;
+            }
+        }
     }
-}
 
-#ship-to-different-address {
-    display: none;
+    #ship-to-different-address {
+        display: none;
+    }
 }
