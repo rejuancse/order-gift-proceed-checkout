@@ -1,9 +1,122 @@
 import "../scss/app.scss";
 
-
 /* global wc_checkout_params */
-jQuery( function( $ ) {
+jQuery(document).ready(function($){
 
+	'use strict';
+
+	$(".giftprocess #shipping_company_field, .giftprocess #shipping_address_2_field").remove();
+
+	/**
+	 * Gift as a Process Coupon
+	 * */ 
+	var wc_checkout_coupons = {
+		init: function() {
+			$( document.body ).on( 'click', 'a.showcoupon', this.show_coupon_form );
+			$( document.body ).on( 'click', '.woocommerce-remove-coupon', this.remove_coupon );
+			$( 'form.checkout_coupon' ).hide().on( 'submit', this.submit );
+		},
+		show_coupon_form: function() {
+			$( '.checkout_coupon' ).slideToggle( 400, function() {
+				$( '.checkout_coupon' ).find( ':input:eq(0)' ).trigger( 'focus' );
+			});
+			return false;
+		},
+		submit: function() {
+			var $form = $( this );
+
+			if ( $form.is( '.processing' ) ) {
+				return false;
+			}
+
+			$form.addClass( 'processing' ).block({
+				message: null,
+				overlayCSS: {
+					background: '#fff',
+					opacity: 0.6
+				}
+			});
+
+			var data = {
+				security:		wc_checkout_params.apply_coupon_nonce,
+				coupon_code:	$form.find( 'input[name="coupon_code"]' ).val()
+			};
+
+			$.ajax({
+				type:		'POST',
+				url:		wc_checkout_params.wc_ajax_url.toString().replace( '%%endpoint%%', 'apply_coupon' ),
+				data:		data,
+				success:	function( code ) {
+					$( '.woocommerce-error, .woocommerce-message' ).remove();
+					$form.removeClass( 'processing' ).unblock();
+
+					if ( code ) {
+						$form.before( code );
+						$form.slideUp();
+
+						$( document.body ).trigger( 'applied_coupon_in_checkout', [ data.coupon_code ] );
+						$( document.body ).trigger( 'update_checkout', { update_shipping_method: false } );
+					}
+				},
+				dataType: 'html'
+			});
+
+			return false;
+		},
+		remove_coupon: function( e ) {
+			e.preventDefault();
+
+			var container = $( this ).parents( '.woocommerce-checkout-review-order' ),
+				coupon    = $( this ).data( 'coupon' );
+
+			container.addClass( 'processing' ).block({
+				message: null,
+				overlayCSS: {
+					background: '#fff',
+					opacity: 0.6
+				}
+			});
+
+			var data = {
+				security: wc_checkout_params.remove_coupon_nonce,
+				coupon:   coupon
+			};
+
+			$.ajax({
+				type:    'POST',
+				url:     wc_checkout_params.wc_ajax_url.toString().replace( '%%endpoint%%', 'remove_coupon' ),
+				data:    data,
+				success: function( code ) {
+					$( '.woocommerce-error, .woocommerce-message' ).remove();
+					container.removeClass( 'processing' ).unblock();
+
+					if ( code ) {
+						$( 'form.woocommerce-checkout' ).before( code );
+
+						$( document.body ).trigger( 'removed_coupon_in_checkout', [ data.coupon ] );
+						$( document.body ).trigger( 'update_checkout', { update_shipping_method: false } );
+
+						// Remove coupon code from coupon field
+						$( 'form.checkout_coupon' ).find( 'input[name="coupon_code"]' ).val( '' );
+					}
+				},
+				error: function ( jqXHR ) {
+					if ( wc_checkout_params.debug_mode ) {
+						/* jshint devel: true */
+						console.log( jqXHR.responseText );
+					}
+				},
+				dataType: 'html'
+			});
+		}
+	};
+
+	wc_checkout_coupons.init();
+
+
+	/**
+	 * Gift as a Process Coupon
+	 * */ 
 	// wc_checkout_params is required to continue, ensure the object exists
 	if ( typeof wc_checkout_params === 'undefined' ) {
 		return false;
@@ -731,4 +844,5 @@ jQuery( function( $ ) {
 	wc_checkout_coupons.init();
 	wc_checkout_login_form.init();
 	wc_terms_toggle.init();
+
 });

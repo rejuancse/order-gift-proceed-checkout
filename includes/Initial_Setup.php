@@ -12,11 +12,12 @@ if (! class_exists('Initial_Setup')) {
             add_action('admin_action_activate_woocommerce_free', array($this, 'activate_woocommerce_free'));
             add_action('woocommerce_after_cart_totals', array($this, 'custom_add_to_cart_redirect'));
             // add_action('woocommerce_available_payment_gateways', array($this, 'wcgt_disable_all_but_cod'));
+            add_action('woocommerce_checkout_fields', array($this, 'wcgt_override_checkout_fields'));
         }
         
         public function custom_add_to_cart_redirect() {
-            echo '<button class="checkout-button button alt wc-forward wp-element-button">
-                <a href="'. get_site_url().'/gift-proceed/" class="color:white">'.__('Order as a Gift', 'wcgt').'</a>
+            echo '<button class="wcgt-order-gift-btn checkout-button button alt wc-forward wp-element-button ">
+                <a href="'. get_site_url().'/gift-proceed/" class="order-asa-gift">'.__('Order as a Gift', 'wcgt').'</a>
             </button>';
         }
 
@@ -260,15 +261,48 @@ if (! class_exists('Initial_Setup')) {
             );
         }
 
-        function wcgt_disable_all_but_cod( $available_payment_gateways ) {
+        public function wcgt_disable_all_but_cod( $available_payment_gateways ) {
+            global $wp;
+            $current_url = home_url( '/gift-proceed/' );
+            $currentpageURL = home_url( $wp->request ).'/';
             $user = wp_get_current_user();
             $allowed_roles = array('customer','subscriber', 'admin');
-            if (!array_intersect($allowed_roles, $user->roles )) {        
-                if (isset($available_payment_gateways['cod'])) {
-                    unset($available_payment_gateways['cod']);
-                }      
+            if (!array_intersect($allowed_roles, $user->roles )) {
+                if( $current_url == $currentpageURL) {
+                    if (isset($available_payment_gateways['cod'])) {
+                        unset($available_payment_gateways['cod']);
+                    } 
+                }   
             }
             return $available_payment_gateways;
+        }
+
+        public function wcgt_override_checkout_fields( $fields ) {
+            global $wp;
+            $current_url = home_url( '/gift-proceed/' );
+            $currentpageURL = home_url( $wp->request ).'/';
+
+            if( $current_url == $currentpageURL) {
+                unset($fields['billing']['billing_company']);
+                unset($fields['billing']['billing_address_2']);
+                unset($fields['billing']['billing_postcode']);
+                unset($fields['order']['order_comments']);
+            }
+            return $fields;
+        }
+        
+
+        
+        // Remove some fields from billing form
+        // Our hooked in function - $fields is passed via the filter!
+        // Get all the fields - https://docs.woothemes.com/document/tutorial-customising-checkout-fields-using-actions-and-filters/
+        function custom_override_checkout_fields_ek( $fields ) {
+            unset($fields['billing']['shipping_first_name']);
+            // unset($fields['billing']['billing_address_1']);
+            // unset($fields['billing']['billing_postcode']);
+            // unset($fields['billing']['billing_state']);
+
+            return $fields;
         }
     }
 }

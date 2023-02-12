@@ -1,22 +1,3 @@
-/*!******************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/scss/app.scss ***!
-  \******************************************************************************************************************************************************/
-.wcgt-form #customer_details {
-  -webkit-columns: 2;
-  -moz-columns: 2;
-  columns: 2;
-}
-.wcgt-form #customer_details .col-1,
-.wcgt-form #customer_details .col-2 {
-  width: 100%;
-}
-.wcgt-form #customer_details .col-1 h3,
-.wcgt-form #customer_details .col-2 h3 {
-  font-size: 40px;
-  margin: 0;
-}
-.wcgt-form #ship-to-different-address {
-  display: none;
-}
+@font-face{font-family:"GreatVibes";font-style:normal;font-weight:500;src:url(../6d246c3b51d7eb58b13a.ttf) format("truetype");font-display:swap}.wcgt-form #customer_details{display:-webkit-box;display:-ms-flexbox;display:flex;gap:40px;border:11px solid #d9d9d9;-o-border-image:url(../e13502dde7668d846ce7.png) 12 round;border-image:url(../e13502dde7668d846ce7.png) 12 round;border-image-width:11px;background-color:#fff}.wcgt-form #customer_details .col-1,.wcgt-form #customer_details .col-2{width:100%;max-width:100%}.wcgt-form #customer_details .col-1 h3,.wcgt-form #customer_details .col-2 h3{margin:0;font-family:"GreatVibes";font-size:240%;margin-top:14px;margin:0;font-weight:400;color:#5ba403;word-spacing:3px;margin-bottom:15px}.wcgt-form #customer_details .col-1 .woocommerce-input-wrapper,.wcgt-form #customer_details .col-2 .woocommerce-input-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex}.wcgt-form #customer_details .col-1 .woocommerce-input-wrapper input,.wcgt-form #customer_details .col-1 .woocommerce-input-wrapper select,.wcgt-form #customer_details .col-2 .woocommerce-input-wrapper input,.wcgt-form #customer_details .col-2 .woocommerce-input-wrapper select{width:100%;height:30px;outline:none;background-color:#fff;background-clip:padding-box;border:1px solid #b3b3b3;border-radius:.25rem;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;padding-right:25px;padding:3px 10px}.wcgt-form #customer_details .col-1 .woocommerce-input-wrapper input:focus,.wcgt-form #customer_details .col-1 .woocommerce-input-wrapper select:focus,.wcgt-form #customer_details .col-2 .woocommerce-input-wrapper input:focus,.wcgt-form #customer_details .col-2 .woocommerce-input-wrapper select:focus{border:1px solid #87298f}.wcgt-form #customer_details .col-1{padding:30px 20px}.wcgt-form #customer_details .col-2{background-color:#fff1fb;padding:30px 20px}.wcgt-form #ship-to-different-address{display:none}.wcgt-form .woocommerce-checkout-review-order ul.methods{list-style:none;padding:0}.wcgt-form table.shop_table.woocommerce-checkout-review-order-table{width:100%;text-align:center;border-collapse:collapse}.wcgt-form td,.wcgt-form th{padding:.5em;border:1px solid #767676;word-break:break-all;word-break:normal}.wc-proceed-to-checkout{width:auto;display:inline;display:initial;margin-right:20px}.wcgt-order-gift-btn{color:#87298f !important;border-radius:2px 2px 2px 2px !important}.wcgt-order-gift-btn{border-color:#87298f;font-size:110%;-webkit-box-shadow:0px 3px 6px -4px #a2a2a2;box-shadow:0px 3px 6px -4px #a2a2a2;border:2px solid;border-radius:5px;margin:0;box-shadow:0px 3px 6px -4px #a2a2a2;font-weight:700;background:rgba(0,0,0,0)}.wcgt-order-gift-btn:hover{color:#fff !important}.wcgt-order-gift-btn:hover{background-color:#87298f}.wcgt-order-gift-btn:hover a{color:#fff !important}.wcgt-order-gift-btn .order-asa-gift{padding:10px;color:#87298f;text-decoration:none}form.checkout_coupon.woocommerce-form-coupon input{width:100%;height:30px;outline:none;background-color:#fff;background-clip:padding-box;border:1px solid #b3b3b3;border-radius:.25rem;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;padding-right:25px;padding:3px 10px}form.checkout_coupon.woocommerce-form-coupon input:focus{border:1px solid #87298f}
 
 /*# sourceMappingURL=main.css.map*/
