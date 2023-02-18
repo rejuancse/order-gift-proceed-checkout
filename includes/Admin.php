@@ -248,11 +248,9 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
      * @return array
      */
     public function get_sections() {
-
         $sections = array(
-            'section-0'         => __( 'Plugin Options', 'wcgt' ),
-            'section-1'         => __( 'Section 1', 'wcgt' ),
-            'section 2'         => __( 'Section 2', 'wcgt' ),
+            'section-0'         => __( 'Style', 'wcgt' ),
+            'section-1'         => __( 'Shortcode', 'wcgt' ),
         );
 
         return apply_filters( 'woocommerce_get_sections_' . $this->id, $sections );
@@ -265,85 +263,102 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
      */
     public function get_settings( $section = null ) {
 
-        switch( $section ){
+        switch( $section ) {
 
             case 'section-0' :
-                $settings = array(
+                $settings = array (
+
+                    'section_title' => array(
+                        'name'     => __( 'Gift Order Style', 'wcgt' ),
+                        'type'     => 'title',
+                        'desc'     => '',
+                        'id'       => 'wc_settings_tab_section_style'
+                    ),
+
+                    'button_text_color' => array(
+                        'name' 		=> __( 'Gift Button text Color', 'wcgt' ),
+                        'type' 		=> 'color',
+                        'desc'     => sprintf( __( 'The base color for Gift button. Default %s.', 'wcgt' ), '<code>#7f54b3</code>' ),
+                        'id'   	=> 'wc_settings_tab_btn_text_color',
+						'css'      => 'width:6em;',
+						'default'  => '#7f54b3',
+						'autoload' => false,
+						'desc_tip' => true,
+                    ),
+
+					'bgColor' => array(
+                        'name' 		=> __( 'Gift Button BG Color', 'wcgt' ),
+                        'type' 		=> 'color',
+                        'desc'     => sprintf( __( 'The base color for Gift button. Default %s.', 'wcgt' ), '<code>#7f54b3</code>' ),
+                        'id'   	=> 'wc_settings_tab_btn_bg_color',
+						'css'      => 'width:6em;',
+						'default'  => '#7f54b3',
+						'autoload' => false,
+						'desc_tip' => true,
+                    ),
+
+					'borderColor' => array(
+                        'name' 		=> __( 'Gift Button Border Color', 'wcgt' ),
+                        'type' 		=> 'color',
+                        'desc'     => sprintf( __( 'The base border color for Gift button. Default %s.', 'wcgt' ), '<code>#7f54b3</code>' ),
+                        'id'   	=> 'wc_settings_tab_btn_border_color',
+						'css'      => 'width:6em;',
+						'default'  => '#7f54b3',
+						'autoload' => false,
+						'desc_tip' => true,
+                    ),
+
+					'section_order_end' => array(
+                        'type' => 'sectionend',
+                        'id' 	=> 'button_style_end'
+                    ),
+
+					'separator_Title' => array(
+						'title' 	=> __( 'Gift Proceed Checkout page Style', 'wcgt' ),
+						'type'  	=> 'title',
+						'id'    	=> 'separator_checkout_title',
+						'desc'     	=> '',
+					),
+
+					'gift_checkout_title_color' => array(
+                        'name' 		=> __( 'Gift Button text Color', 'wcgt' ),
+                        'type' 		=> 'color',
+                        'desc'     => sprintf( __( 'The base color for Gift button. Default %s.', 'wcgt' ), '<code>#7f54b3</code>' ),
+                        'id'   	=> 'wc_settings_gift_checkout_title_color',
+						'css'      => 'width:6em;',
+						'default'  => '#5ba403',
+						'autoload' => false,
+						'desc_tip' => true,
+                    ),
+
+                    'section_end' => array(
+                        'type' => 'sectionend',
+                        'id' 	=> 'wc_settings_tab_demo_end-section-1'
+                    )
+                );
+
+            break;
+
+			case 'section-1' :
+                $settings = array (
                     'section_title' => array(
                         'name'     => __( 'Main Section Title', 'wcgt' ),
                         'type'     => 'title',
                         'desc'     => '',
                         'id'       => 'wc_settings_tab_demo_title_section-1'
                     ),
-                    'title' => array(
-                        'name' => __( 'Main Title', 'wcgt' ),
-                        'type' => 'text',
-                        'desc' => __( 'This is some helper text', 'wcgt' ),
-                        'id'   => 'wc_settings_tab_demo_title_section-1'
-                    ),
-                    'description' => array(
-                        'name' => __( 'Main Description', 'wcgt' ),
-                        'type' => 'textarea',
-                        'desc' => __( 'This is a paragraph describing the setting. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda.', 'wcgt' ),
-                        'id'   => 'wc_settings_tab_demo_description_section-1'
-                    ),
-                    'section_end' => array(
-                         'type' => 'sectionend',
-                         'id' => 'wc_settings_tab_demo_end-section-1'
-                    )
-                );
-            break;
 
-            case 'section-1':
-                $settings = array(
-                    'section_title' => array(
-                        'name'     => __( 'Section One Title', 'wcgt' ),
-                        'type'     => 'title',
-                        'desc'     => '',
-                        'id'       => 'wc_settings_tab_demo_section_title_section-2'
-                    ),
                     'title' => array(
-                        'name' => __( 'Section One Title', 'wcgt' ),
+                        'name' => __( 'Shortcode', 'wcgt' ),
                         'type' => 'text',
-                        'desc' => __( 'This is some helper text', 'wcgt' ),
-                        'id'   => 'wc_settings_tab_demo_title_section-2'
+                        'desc' => __( 'Default Page Gift Proceed with added [wcgt_gift]', 'wcgt' ),
+                        'id'   => 'wc_settings_tab_shortcode',
+						'default' => '[wcgt_gift]'
                     ),
-                    'description' => array(
-                        'name' => __( 'Section One Description', 'wcgt' ),
-                        'type' => 'textarea',
-                        'desc' => __( 'This is a paragraph describing the setting. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda.', 'wcgt' ),
-                        'id'   => 'wc_settings_tab_demo_description_section-2'
-                    ),
-                    'section_end' => array(
-                         'type' => 'sectionend',
-                         'id' => 'wc_settings_tab_demo_section_end_section-2'
-                    )
-                );
-            break;
 
-            case 'section-2':
-                $settings = array(
-                    'section_title' => array(
-                        'name'     => __( 'Section Two Title', 'wcgt' ),
-                        'type'     => 'title',
-                        'desc'     => '',
-                        'id'       => 'wc_settings_tab_demo_section_title'
-                    ),
-                    'title' => array(
-                        'name' => __( 'Section Two Title', 'wcgt' ),
-                        'type' => 'text',
-                        'desc' => __( 'This is some helper text', 'wcgt' ),
-                        'id'   => 'wc_settings_tab_demo_title'
-                    ),
-                    'description' => array(
-                        'name' => __( 'Section Two Description', 'wcgt' ),
-                        'type' => 'textarea',
-                        'desc' => __( 'This is a paragraph describing the setting. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda. Lorem ipsum yadda yadda yadda.', 'wcgt' ),
-                        'id'   => 'wc_settings_tab_demo_description'
-                    ),
                     'section_end' => array(
-                         'type' => 'sectionend',
-                         'id' => 'wc_settings_tab_demo_section_end'
+                        'type' => 'sectionend',
+                        'id' 	=> 'wc_settings_tab_shortcode'
                     )
                 );
             break;
@@ -360,13 +375,23 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
 						'name' => __( 'Enable Gift Form', 'wcgt' ),
 						'type' => 'checkbox',
 						'desc' => __( 'Enable Gift Form', 'wcgt' ),
-						'id'   => 'wc_settings_tab_demo_title'
+						'id'   => 'wc_settings_enable_btn',
+						'default' => true
 					),
+					'order_gift_btn' => array(
+                        'name' 	=> __( 'Oder as a Gift', 'wcgt' ),
+                        'type' 	=> 'text',
+                        'desc' 	=> __( 'Oder as a Gift Button text change', 'wcgt' ),
+                        'id'   	=> 'wc_settings_tab_button_text',
+						'default' => 'Order as a Gift'
+                    ),
 					'section_end' => array(
-						'type' => 'sectionend',
-						'id' => 'wc_settings_tab_demo_section_default'
+						'type' 	=> 'sectionend',
+						'id' 	=> 'wc_settings_tab_demo_section_default'
 					)
 				);
+
+				
         }
 
         return apply_filters( 'wc_settings_tab_demo_settings', $settings, $section );
@@ -380,7 +405,6 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
         $settings = $this->get_settings( $current_section );
         WC_Admin_Settings::output_fields( $settings );
     }
-
 
     /**
      * Save settings

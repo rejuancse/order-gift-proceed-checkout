@@ -13,12 +13,50 @@ if (! class_exists('Initial_Setup')) {
             add_action('woocommerce_after_cart_totals', array($this, 'custom_add_to_cart_redirect'));
             // add_action('woocommerce_available_payment_gateways', array($this, 'wcgt_disable_all_but_cod'));
             add_action('woocommerce_checkout_fields', array($this, 'wcgt_override_checkout_fields'));
+            add_filter( 'display_post_states', array( $this, 'wcgt_add_display_post_states' ), 10, 2 );
         }
         
         public function custom_add_to_cart_redirect() {
-            echo '<button class="wcgt-order-gift-btn checkout-button button alt wc-forward wp-element-button ">
-                <a href="'. get_site_url().'/gift-proceed/" class="order-asa-gift">'.__('Order as a Gift', 'wcgt').'</a>
-            </button>';
+            $btn_text_color = get_option( "wc_settings_tab_btn_text_color", true );
+            $btn_border_color = get_option( "wc_settings_tab_btn_border_color", true );
+            $btn_bg_color = get_option( "wc_settings_tab_btn_bg_color", true );
+
+            $enable_btn = get_option( "wc_settings_enable_btn", true );
+            $order_btn = get_option( "wc_settings_tab_button_text" );
+            $buttonName = !empty( $order_btn ) ? $order_btn : __('Order as a Gift', 'wcgt');
+
+            if( isset($enable_btn) && $enable_btn == 'yes' ) {
+                echo '<div class="wcgt-order-gift-btn wc-proceed-to-checkout">
+                    <a href="'. get_site_url().'/gift-proceed/" class="checkout-button button alt wc-forward wp-element-button">'.$buttonName.'</a>
+                </div>';
+            } ?>
+
+            <style type="text/css">
+                .wcgt-order-gift-btn .checkout-button {
+                    color: <?php echo (isset($btn_text_color) && !empty($btn_text_color)) ? $btn_text_color : '#7f54b3'; ?>
+                }
+
+                .wcgt-order-gift-btn .checkout-button {
+                    border-color: <?php echo (isset($btn_border_color) && !empty($btn_border_color)) ? $btn_border_color : '#7f54b3'; ?>
+                }
+
+                .wcgt-order-gift-btn .checkout-button {
+                    background-color: <?php echo (isset($btn_bg_color) && !empty($btn_bg_color)) ? $btn_bg_color : '#7f54b3'; ?>
+                }
+            </style>
+        <?php }
+
+        /**
+         * Add a post display state for special WP pages in the page list table.
+         *
+         * @param array   $post_states An array of post display states.
+         * @param WP_Post $post        The current post object.
+         */
+        public function wcgt_add_display_post_states( $post_states, $post ) {
+            if ( 'gift-proceed' === $post->post_name && isset( $post->post_name ) ) {
+                $post_states['wc_page_for_shop'] = __( 'Gift Checkout Page', 'wcgt' );
+            }
+            return $post_states;
         }
 
         /**
@@ -74,12 +112,11 @@ if (! class_exists('Initial_Setup')) {
         }
 
         /**
-         * Deactivation Hook For Crowdfunding
+         * Deactivation Hook For Gift
          */
         public function initial_plugin_deactivation(){
 
         }
-
 
         public function activation_css() {
             ?>
@@ -288,20 +325,6 @@ if (! class_exists('Initial_Setup')) {
                 unset($fields['billing']['billing_postcode']);
                 unset($fields['order']['order_comments']);
             }
-            return $fields;
-        }
-        
-
-        
-        // Remove some fields from billing form
-        // Our hooked in function - $fields is passed via the filter!
-        // Get all the fields - https://docs.woothemes.com/document/tutorial-customising-checkout-fields-using-actions-and-filters/
-        function custom_override_checkout_fields_ek( $fields ) {
-            unset($fields['billing']['shipping_first_name']);
-            // unset($fields['billing']['billing_address_1']);
-            // unset($fields['billing']['billing_postcode']);
-            // unset($fields['billing']['billing_state']);
-
             return $fields;
         }
     }
