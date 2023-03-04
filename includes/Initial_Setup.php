@@ -11,36 +11,35 @@ if (! class_exists('Initial_Setup')) {
             add_action('wp_ajax_install_woocommerce_plugin',     array($this, 'install_woocommerce_plugin'));
             add_action('admin_action_activate_woocommerce_free', array($this, 'activate_woocommerce_free'));
             add_action('woocommerce_after_cart_totals', array($this, 'custom_add_to_cart_redirect'));
-            // add_action('woocommerce_available_payment_gateways', array($this, 'wcgt_disable_all_but_cod'));
-            add_action('woocommerce_checkout_fields', array($this, 'wcgt_override_checkout_fields'));
-            add_filter( 'display_post_states', array( $this, 'wcgt_add_display_post_states' ), 10, 2 );
+            add_action('woocommerce_available_payment_gateways', array($this, 'ogpc_disable_all_but_cod'));
+            add_action('woocommerce_checkout_fields', array($this, 'ogpc_override_checkout_fields'));
+            add_filter( 'display_post_states', array( $this, 'ogpc_add_display_post_states' ), 10, 2 );
         }
         
         public function custom_add_to_cart_redirect() {
             $btn_text_color = get_option( "wc_settings_tab_btn_text_color", true );
             $btn_border_color = get_option( "wc_settings_tab_btn_border_color", true );
             $btn_bg_color = get_option( "wc_settings_tab_btn_bg_color", true );
-
             $enable_btn = get_option( "wc_settings_enable_btn", true );
             $order_btn = get_option( "wc_settings_tab_button_text" );
-            $buttonName = !empty( $order_btn ) ? $order_btn : __('Order as a Gift', 'wcgt');
+            $buttonName = !empty( $order_btn ) ? $order_btn : __('Order as a Gift', 'ogpc');
 
             if( isset($enable_btn) && $enable_btn == 'yes' ) {
-                echo '<div class="wcgt-order-gift-btn wc-proceed-to-checkout">
+                echo '<div class="ogpc-order-gift-btn wc-proceed-to-checkout">
                     <a href="'. get_site_url().'/gift-proceed/" class="checkout-button button alt wc-forward wp-element-button">'.$buttonName.'</a>
                 </div>';
             } ?>
 
             <style type="text/css">
-                .wcgt-order-gift-btn .checkout-button {
+                .ogpc-order-gift-btn .checkout-button {
                     color: <?php echo (isset($btn_text_color) && !empty($btn_text_color)) ? $btn_text_color : '#7f54b3'; ?>
                 }
 
-                .wcgt-order-gift-btn .checkout-button {
+                .ogpc-order-gift-btn .checkout-button {
                     border-color: <?php echo (isset($btn_border_color) && !empty($btn_border_color)) ? $btn_border_color : '#7f54b3'; ?>
                 }
 
-                .wcgt-order-gift-btn .checkout-button {
+                .ogpc-order-gift-btn .checkout-button {
                     background-color: <?php echo (isset($btn_bg_color) && !empty($btn_bg_color)) ? $btn_bg_color : '#7f54b3'; ?>
                 }
             </style>
@@ -52,9 +51,9 @@ if (! class_exists('Initial_Setup')) {
          * @param array   $post_states An array of post display states.
          * @param WP_Post $post        The current post object.
          */
-        public function wcgt_add_display_post_states( $post_states, $post ) {
+        public function ogpc_add_display_post_states( $post_states, $post ) {
             if ( 'gift-proceed' === $post->post_name && isset( $post->post_name ) ) {
-                $post_states['wc_page_for_shop'] = __( 'Gift Checkout Page', 'wcgt' );
+                $post_states['wc_page_for_shop'] = __( 'Gift Checkout Page', 'ogpc' );
             }
             return $post_states;
         }
@@ -63,7 +62,7 @@ if (! class_exists('Initial_Setup')) {
          * Do some task during plugin activation
          */
         public function initial_plugin_activation() {
-            if(get_option('wcgt_proceed_order')) {
+            if(get_option('ogpc_proceed_order')) {
                 return false;
             }
             self::update_option();
@@ -75,7 +74,7 @@ if (! class_exists('Initial_Setup')) {
          */
         public function update_option() {
             $init_setup_data = array (
-                'wcgt_proceed_order' => WC_GIFT_VERSION
+                'ogpc_proceed_order' => OGPC_GIFT_VERSION
             );
 
             foreach ($init_setup_data as $key => $value ) {
@@ -87,9 +86,9 @@ if (! class_exists('Initial_Setup')) {
          * Insert menu page
          */
         public function insert_page() {
-            $wcgt_gift = array(
+            $gift_checkout_proceed = array(
                 'post_title'    => 'Gift Proceed',
-                'post_content'  => '[wcgt_gift]',
+                'post_content'  => '[gift_checkout_proceed]',
                 'post_type'     => 'page',
                 'post_status'   => 'publish',
             );
@@ -98,9 +97,9 @@ if (! class_exists('Initial_Setup')) {
              * Insert the page into the database
              * @Gift Pages Object
              */
-            $form_page = wp_insert_post( $wcgt_gift );
+            $form_page = wp_insert_post( $gift_checkout_proceed );
             if( !is_wp_error( $form_page ) ){
-                wcgt_function()->update_text( 'gift_page_id', $form_page );
+                ogpc_function()->update_text( 'gift_page_id', $form_page );
             }
         }
 
@@ -121,34 +120,34 @@ if (! class_exists('Initial_Setup')) {
         public function activation_css() {
             ?>
             <style type="text/css">
-                .wcgt-install-notice{
+                .ogpc-install-notice{
                     padding: 20px;
                 }
-                .wcgt-install-notice-inner{
+                .ogpc-install-notice-inner{
                     display: flex;
                     align-items: center;
                 }
-                .wcgt-install-notice-inner .button{
+                .ogpc-install-notice-inner .button{
                     padding: 5px 30px;
                     height: auto;
                     line-height: 20px;
                     text-transform: capitalize;
                 }
-                .wcgt-install-notice-content{
+                .ogpc-install-notice-content{
                     flex-grow: 1;
                     padding-left: 20px;
                     padding-right: 20px;
                 }
-                .wcgt-install-notice-icon img{
+                .ogpc-install-notice-icon img{
                     width: 64px;
                     border-radius: 4px;
                     display: block;
                 }
-                .wcgt-install-notice-content h2{
+                .ogpc-install-notice-content h2{
                     margin-top: 0;
                     margin-bottom: 5px;
                 }
-                .wcgt-install-notice-content p{
+                .ogpc-install-notice-content p{
                     margin-top: 0;
                     margin-bottom: 0px;
                     padding: 0;
@@ -158,7 +157,7 @@ if (! class_exists('Initial_Setup')) {
             <script type="text/javascript">
                 jQuery(document).ready(function($){
                     'use strict';
-                    $(document).on('click', '.install-wcgt-button', function(e){
+                    $(document).on('click', '.install-ogpc-button', function(e){
                         e.preventDefault();
                         var $btn = $(this);
                         $.ajax({
@@ -169,8 +168,8 @@ if (! class_exists('Initial_Setup')) {
                                 $btn.addClass('updating-message');
                             },
                             success: function (data) {
-                                $('.install-wcgt-button').remove();
-                                $('#wcgt_install_msg').html(data);
+                                $('.install-ogpc-button').remove();
+                                $('#ogpc_install_msg').html(data);
                             },
                             complete: function () {
                                 $btn.removeClass('updating-message');
@@ -188,26 +187,26 @@ if (! class_exists('Initial_Setup')) {
         public function free_plugin_installed_but_inactive_notice(){
             $this->activation_css();
             ?>
-            <div class="notice notice-error wcgt-install-notice">
-                <div class="wcgt-install-notice-inner">
-                    <div class="wcgt-install-notice-icon">
-                        <img src="<?php echo WC_GIFT_URL.'/assets/src/images/gift-card.png'; ?>" alt="logo" />
+            <div class="notice notice-error ogpc-install-notice">
+                <div class="ogpc-install-notice-inner">
+                    <div class="ogpc-install-notice-icon">
+                        <img src="<?php echo OGPC_GIFT_URL.'/assets/src/images/gift-card.png'; ?>" alt="logo" />
                     </div>
-                    <div class="wcgt-install-notice-content">
-                        <h2><?php _e('Thanks for using WooCommerce Gift Proceed Checkout', 'wcgt'); ?></h2>
+                    <div class="ogpc-install-notice-content">
+                        <h2><?php _e('Thanks for using WooCommerce Gift Proceed Checkout', 'ogpc'); ?></h2>
                         <?php 
                             printf(
                                 '<p>%1$s <a target="_blank" href="%2$s">%3$s</a> %4$s</p>', 
-                                __('You must have','wcgt'), 
+                                __('You must have','ogpc'), 
                                 'https://wordpress.org/plugins/woocommerce/', 
-                                __('WooCommerce','wcgt'), 
-                                __('installed and activated on this website in order to use WooCommerce Gift Proceed Checkout.','wcgt')
+                                __('WooCommerce','ogpc'), 
+                                __('installed and activated on this website in order to use WooCommerce Gift Proceed Checkout.','ogpc')
                             );
                         ?>
-                        <a href="#" target="_blank"><?php _e('Learn more about WooCommerce Gift Proceed Checkout', 'wcgt'); ?></a>
+                        <a href="#" target="_blank"><?php _e('Learn more about WooCommerce Gift Proceed Checkout', 'ogpc'); ?></a>
                     </div>
-                    <div class="wcgt-install-notice-button">
-                        <a  class="button button-primary" href="<?php echo add_query_arg(array('action' => 'activate_woocommerce_free'), admin_url()); ?>"><?php _e('Activate WooCommerce', 'wcgt'); ?></a>
+                    <div class="ogpc-install-notice-button">
+                        <a  class="button button-primary" href="<?php echo add_query_arg(array('action' => 'activate_woocommerce_free'), admin_url()); ?>"><?php _e('Activate WooCommerce', 'ogpc'); ?></a>
                     </div>
                 </div>
             </div>
@@ -218,29 +217,29 @@ if (! class_exists('Initial_Setup')) {
             include( ABSPATH . 'wp-admin/includes/plugin-install.php' );
             $this->activation_css();
             ?>
-            <div class="notice notice-error wcgt-install-notice">
-                <div class="wcgt-install-notice-inner">
-                    <div class="wcgt-install-notice-icon">
-                        <img src="<?php echo WC_GIFT_URL.'/assets/src/images/gift-card.png'; ?>" alt="logo" />
+            <div class="notice notice-error ogpc-install-notice">
+                <div class="ogpc-install-notice-inner">
+                    <div class="ogpc-install-notice-icon">
+                        <img src="<?php echo OGPC_GIFT_URL.'/assets/src/images/gift-card.png'; ?>" alt="logo" />
                     </div>
-                    <div class="wcgt-install-notice-content">
-                        <h2><?php _e('Thanks for using WooCommerce Gift Proceed Checkout', 'wcgt'); ?></h2>
+                    <div class="ogpc-install-notice-content">
+                        <h2><?php _e('Thanks for using WooCommerce Gift Proceed Checkout', 'ogpc'); ?></h2>
                         <?php 
                             printf(
                                 '<p>%1$s <a target="_blank" href="%2$s">%3$s</a> %4$s</p>', 
-                                __('You must have','wcgt'), 
+                                __('You must have','ogpc'), 
                                 'https://wordpress.org/plugins/woocommerce/', 
-                                __('WooCommerce','wcgt'), 
-                                __('installed and activated on this website in order to use WooCommerce Gift Proceed Checkout.','wcgt')
+                                __('WooCommerce','ogpc'), 
+                                __('installed and activated on this website in order to use WooCommerce Gift Proceed Checkout.','ogpc')
                             );
                         ?>
-                        <a href="#" target="_blank"><?php _e('Learn more about WooCommerce Gift Proceed Checkout', 'wcgt'); ?></a>
+                        <a href="#" target="_blank"><?php _e('Learn more about WooCommerce Gift Proceed Checkout', 'ogpc'); ?></a>
                     </div>
-                    <div class="wcgt-install-notice-button">
-                        <a class="install-wcgt-button button button-primary" data-slug="woocommerce" href="<?php echo add_query_arg(array('action' => 'install_woocommerce_free'), admin_url()); ?>"><?php _e('Install WooCommerce', 'wcgt'); ?></a>
+                    <div class="ogpc-install-notice-button">
+                        <a class="install-ogpc-button button button-primary" data-slug="woocommerce" href="<?php echo add_query_arg(array('action' => 'install_woocommerce_free'), admin_url()); ?>"><?php _e('Install WooCommerce', 'ogpc'); ?></a>
                     </div>
                 </div>
-                <div id="wcgt_install_msg"></div>
+                <div id="ogpc_install_msg"></div>
             </div>
             <?php
         }
@@ -291,14 +290,14 @@ if (! class_exists('Initial_Setup')) {
         public static function wc_low_version(){
             printf(
                 '<div class="notice notice-error is-dismissible"><p>%1$s <a target="_blank" href="%2$s">%3$s</a> %4$s</p></div>', 
-                __('Your','wcgt'), 
+                __('Your','ogpc'), 
                 'https://wordpress.org/plugins/woocommerce/', 
-                __('WooCommerce','wcgt'), 
-                __('version is below then 3.0, please update.','wcgt') 
+                __('WooCommerce','ogpc'), 
+                __('version is below then 3.0, please update.','ogpc') 
             );
         }
 
-        public function wcgt_disable_all_but_cod( $available_payment_gateways ) {
+        public function ogpc_disable_all_but_cod( $available_payment_gateways ) {
             global $wp;
             $current_url = home_url( '/gift-proceed/' );
             $currentpageURL = home_url( $wp->request ).'/';
@@ -314,7 +313,7 @@ if (! class_exists('Initial_Setup')) {
             return $available_payment_gateways;
         }
 
-        public function wcgt_override_checkout_fields( $fields ) {
+        public function ogpc_override_checkout_fields( $fields ) {
             global $wp;
             $current_url = home_url( '/gift-proceed/' );
             $currentpageURL = home_url( $wp->request ).'/';

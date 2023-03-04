@@ -1,5 +1,5 @@
 {
-    "name": "asus/WCGT-Gift-Proceed",
+    "name": "order-gift-proceed-checkout",
     "type": "wordpress-plugin",
     "license": "GPLv2",
     "authors": [

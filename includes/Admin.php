@@ -238,7 +238,7 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
      * @return array
      */
     public function add_settings_tab( $settings_tabs ) {
-        $settings_tabs[$this->id] = __( 'Settings Gift Proceed', 'wcgt' );
+        $settings_tabs[$this->id] = __( 'Settings Gift Proceed', 'ogpc' );
         return $settings_tabs;
     }
 
@@ -249,8 +249,8 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
      */
     public function get_sections() {
         $sections = array(
-            'section-0'         => __( 'Style', 'wcgt' ),
-            'section-1'         => __( 'Shortcode', 'wcgt' ),
+            'section-0'         => __( 'Style', 'ogpc' ),
+            'section-1'         => __( 'Shortcode', 'ogpc' ),
         );
 
         return apply_filters( 'woocommerce_get_sections_' . $this->id, $sections );
@@ -269,16 +269,16 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
                 $settings = array (
 
                     'section_title' => array(
-                        'name'     => __( 'Gift Order Style', 'wcgt' ),
+                        'name'     => __( 'Gift Order Style', 'ogpc' ),
                         'type'     => 'title',
                         'desc'     => '',
                         'id'       => 'wc_settings_tab_section_style'
                     ),
 
                     'button_text_color' => array(
-                        'name' 		=> __( 'Gift Button text Color', 'wcgt' ),
+                        'name' 		=> __( 'Gift Button text Color', 'ogpc' ),
                         'type' 		=> 'color',
-                        'desc'     => sprintf( __( 'The base color for Gift button. Default %s.', 'wcgt' ), '<code>#7f54b3</code>' ),
+                        'desc'     => sprintf( __( 'The base color for Gift button. Default %s.', 'ogpc' ), '<code>#7f54b3</code>' ),
                         'id'   	=> 'wc_settings_tab_btn_text_color',
 						'css'      => 'width:6em;',
 						'default'  => '#7f54b3',
@@ -287,9 +287,9 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
                     ),
 
 					'bgColor' => array(
-                        'name' 		=> __( 'Gift Button BG Color', 'wcgt' ),
+                        'name' 		=> __( 'Gift Button BG Color', 'ogpc' ),
                         'type' 		=> 'color',
-                        'desc'     => sprintf( __( 'The base color for Gift button. Default %s.', 'wcgt' ), '<code>#7f54b3</code>' ),
+                        'desc'     => sprintf( __( 'The base color for Gift button. Default %s.', 'ogpc' ), '<code>#7f54b3</code>' ),
                         'id'   	=> 'wc_settings_tab_btn_bg_color',
 						'css'      => 'width:6em;',
 						'default'  => '#7f54b3',
@@ -298,9 +298,9 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
                     ),
 
 					'borderColor' => array(
-                        'name' 		=> __( 'Gift Button Border Color', 'wcgt' ),
+                        'name' 		=> __( 'Gift Button Border Color', 'ogpc' ),
                         'type' 		=> 'color',
-                        'desc'     => sprintf( __( 'The base border color for Gift button. Default %s.', 'wcgt' ), '<code>#7f54b3</code>' ),
+                        'desc'     => sprintf( __( 'The base border color for Gift button. Default %s.', 'ogpc' ), '<code>#7f54b3</code>' ),
                         'id'   	=> 'wc_settings_tab_btn_border_color',
 						'css'      => 'width:6em;',
 						'default'  => '#7f54b3',
@@ -314,16 +314,16 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
                     ),
 
 					'separator_Title' => array(
-						'title' 	=> __( 'Gift Proceed Checkout page Style', 'wcgt' ),
+						'title' 	=> __( 'Gift Proceed Checkout page Style', 'ogpc' ),
 						'type'  	=> 'title',
 						'id'    	=> 'separator_checkout_title',
 						'desc'     	=> '',
 					),
 
 					'gift_checkout_title_color' => array(
-                        'name' 		=> __( 'Gift Button text Color', 'wcgt' ),
+                        'name' 		=> __( 'Gift Button text Color', 'ogpc' ),
                         'type' 		=> 'color',
-                        'desc'     => sprintf( __( 'The base color for Gift button. Default %s.', 'wcgt' ), '<code>#7f54b3</code>' ),
+                        'desc'     => sprintf( __( 'The base color for Gift button. Default %s.', 'ogpc' ), '<code>#7f54b3</code>' ),
                         'id'   	=> 'wc_settings_gift_checkout_title_color',
 						'css'      => 'width:6em;',
 						'default'  => '#5ba403',
@@ -342,18 +342,18 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
 			case 'section-1' :
                 $settings = array (
                     'section_title' => array(
-                        'name'     => __( 'Main Section Title', 'wcgt' ),
+                        'name'     => __( 'Main Section Title', 'ogpc' ),
                         'type'     => 'title',
                         'desc'     => '',
                         'id'       => 'wc_settings_tab_demo_title_section-1'
                     ),
 
                     'title' => array(
-                        'name' => __( 'Shortcode', 'wcgt' ),
+                        'name' => __( 'Shortcode', 'ogpc' ),
                         'type' => 'text',
-                        'desc' => __( 'Default Page Gift Proceed with added [wcgt_gift]', 'wcgt' ),
+                        'desc' => __( 'Default Page Gift Proceed with added [gift_checkout_proceed]', 'ogpc' ),
                         'id'   => 'wc_settings_tab_shortcode',
-						'default' => '[wcgt_gift]'
+						'default' => '[gift_checkout_proceed]'
                     ),
 
                     'section_end' => array(
@@ -366,22 +366,22 @@ class WC_Settings_Gift_Proceed_Plugin extends WC_Settings_Gift_Proceed_Page {
 			default:
 				$settings = array(
 					'section_title' => array(
-						'name'     => __( 'General Settings', 'wcgt' ),
+						'name'     => __( 'General Settings', 'ogpc' ),
 						'type'     => 'title',
 						'desc'     => '',
 						'id'       => 'wc_settings_tab_demo_section_title'
 					),
 					'title' => array(
-						'name' => __( 'Enable Gift Form', 'wcgt' ),
+						'name' => __( 'Enable Gift Form', 'ogpc' ),
 						'type' => 'checkbox',
-						'desc' => __( 'Enable Gift Form', 'wcgt' ),
+						'desc' => __( 'Enable Gift Form', 'ogpc' ),
 						'id'   => 'wc_settings_enable_btn',
 						'default' => true
 					),
 					'order_gift_btn' => array(
-                        'name' 	=> __( 'Oder as a Gift', 'wcgt' ),
+                        'name' 	=> __( 'Oder as a Gift', 'ogpc' ),
                         'type' 	=> 'text',
-                        'desc' 	=> __( 'Oder as a Gift Button text change', 'wcgt' ),
+                        'desc' 	=> __( 'Oder as a Gift Button text change', 'ogpc' ),
                         'id'   	=> 'wc_settings_tab_button_text',
 						'default' => 'Order as a Gift'
                     ),

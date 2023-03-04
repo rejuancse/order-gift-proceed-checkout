@@ -8,7 +8,7 @@
   src: url(../6d246c3b51d7eb58b13a.ttf) format("truetype");
   font-display: swap;
 }
-.wcgt-form #customer_details {
+.ogpc-form #customer_details {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -18,13 +18,13 @@
   border-image-width: 11px;
   background-color: #FFFFFF;
 }
-.wcgt-form #customer_details .col-1,
-.wcgt-form #customer_details .col-2 {
+.ogpc-form #customer_details .col-1,
+.ogpc-form #customer_details .col-2 {
   width: 100%;
   max-width: 100%;
 }
-.wcgt-form #customer_details .col-1 h3,
-.wcgt-form #customer_details .col-2 h3 {
+.ogpc-form #customer_details .col-1 h3,
+.ogpc-form #customer_details .col-2 h3 {
   margin: 0;
   font-family: "GreatVibes";
   font-size: 240%;
@@ -35,15 +35,15 @@
   word-spacing: 3px;
   margin-bottom: 15px;
 }
-.wcgt-form #customer_details .col-1 .woocommerce-input-wrapper,
-.wcgt-form #customer_details .col-2 .woocommerce-input-wrapper {
+.ogpc-form #customer_details .col-1 .woocommerce-input-wrapper,
+.ogpc-form #customer_details .col-2 .woocommerce-input-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
-.wcgt-form #customer_details .col-1 .woocommerce-input-wrapper input, .wcgt-form #customer_details .col-1 .woocommerce-input-wrapper select,
-.wcgt-form #customer_details .col-2 .woocommerce-input-wrapper input,
-.wcgt-form #customer_details .col-2 .woocommerce-input-wrapper select {
+.ogpc-form #customer_details .col-1 .woocommerce-input-wrapper input, .ogpc-form #customer_details .col-1 .woocommerce-input-wrapper select,
+.ogpc-form #customer_details .col-2 .woocommerce-input-wrapper input,
+.ogpc-form #customer_details .col-2 .woocommerce-input-wrapper select {
   width: 100%;
   height: 30px;
   outline: none;
@@ -56,31 +56,31 @@
   padding-right: 25px;
   padding: 3px 10px;
 }
-.wcgt-form #customer_details .col-1 .woocommerce-input-wrapper input:focus, .wcgt-form #customer_details .col-1 .woocommerce-input-wrapper select:focus,
-.wcgt-form #customer_details .col-2 .woocommerce-input-wrapper input:focus,
-.wcgt-form #customer_details .col-2 .woocommerce-input-wrapper select:focus {
+.ogpc-form #customer_details .col-1 .woocommerce-input-wrapper input:focus, .ogpc-form #customer_details .col-1 .woocommerce-input-wrapper select:focus,
+.ogpc-form #customer_details .col-2 .woocommerce-input-wrapper input:focus,
+.ogpc-form #customer_details .col-2 .woocommerce-input-wrapper select:focus {
   border: 1px solid #87298f;
 }
-.wcgt-form #customer_details .col-1 {
+.ogpc-form #customer_details .col-1 {
   padding: 30px 30px;
 }
-.wcgt-form #customer_details .col-2 {
+.ogpc-form #customer_details .col-2 {
   background-color: #fff1fb;
   padding: 30px 30px;
 }
-.wcgt-form #ship-to-different-address {
+.ogpc-form #ship-to-different-address {
   display: none;
 }
-.wcgt-form .woocommerce-checkout-review-order ul.methods {
+.ogpc-form .woocommerce-checkout-review-order ul.methods {
   list-style: none;
   padding: 0;
 }
-.wcgt-form table.shop_table.woocommerce-checkout-review-order-table {
+.ogpc-form table.shop_table.woocommerce-checkout-review-order-table {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
 }
-.wcgt-form td, .wcgt-form th {
+.ogpc-form td, .ogpc-form th {
   padding: 0.5em;
   border: 1px solid #767676;
   word-break: break-all;
@@ -94,7 +94,7 @@
   margin-right: 20px;
 }
 
-.wcgt-order-gift-btn .checkout-button {
+.ogpc-order-gift-btn .checkout-button {
   border: 2px solid;
 }
 
