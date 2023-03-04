@@ -163,7 +163,7 @@ if ( ! class_exists( 'WC_Settings_Gift_Proceed_Page', false ) ) :
 				$class     = ( $current_section === $id ? 'current' : '' );
 				$separator = ( end( $array_keys ) === $id ? '' : '|' );
 				$text      = esc_html( $label );
-				echo "<li><a href='$url' class='$class'>$text</a> $separator </li>";
+				echo "<li><a href='".esc_url($url)."' class='".esc_attr($class)."'>".esc_html($text)."</a>".esc_html($separator)."</li>";
 			}
 
 			echo '</ul><br class="clear" />';

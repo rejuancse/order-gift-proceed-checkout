@@ -2,13 +2,12 @@
 
 Contributors: rejuancse
 Tags: woocommerce, Checkout, Gift Checkout, Gift Proceed, Order as a Gift
-Requires at least: 5.0
-Tested up to: 5.7
-Requires PHP: 5.4.0
-Stable tag:  1.0.0
+Requires at least: 5.9
+Tested up to: 6.1
+Requires PHP: 7.2
+Stable tag:  1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-
 
 == Description ==
 Order Gift Proceed Checkout is easily manage gift order in woocommerce platform. In this plugin you can easily handle order as a gift.
@@ -28,7 +27,7 @@ Please let us know your feedback, if you think something can be more awesome in 
 
 = Minimum Requirements =
 
-* PHP version 5.6.0 or greater (PHP 7.1 or greater is recommended)
+* PHP version 5.6.0 or greater (PHP 7.2 or greater is recommended)
 * MySQL version 5.0 or greater (MySQL 5.6 or greater is recommended)
 
 
@@ -41,7 +40,7 @@ This will open up a page showing all the available plugins in WordPress. In the 
 
 = Manual installation =
 
-Go to Dashboard > Plugins > Add New, then upload xwoo.zip file and click Install Now.
+Go to Dashboard > Plugins > Add New, then upload order-gift-proceed-checkout.zip file and click Install Now.
 
 
 == Screenshots ==
@@ -56,13 +55,17 @@ Go to Dashboard > Plugins > Add New, then upload xwoo.zip file and click Install
 A. You can get support by posting on the support section of this plugin on WordPress plugin directory, or on the support mail: rejuan.17bd@gmail.com
 
 = Q. Can I use my existing WordPress theme? =
-A. Sure, you can use your existing WordPress theme with event XWOO.
+A. Sure, you can use your existing WordPress theme with event order-gift-proceed-checkout.
 
 = Q. Where can I report a bug? =
 A. Found a bug? Please let us know by posting on the support section of this plugin on WordPress plugin directory or directly on our support mail: rejuan.17bd@gmail.com
 
 
 == Changelog ==
+
+= 1.0.1 [04/03/2023] =
+* Variables and escaped issue fixed
+* readme.txt file updated
 
 = 1.0.0 [19/02/2023] =
 * Initial version released
