@@ -32,15 +32,15 @@ if (! class_exists('Initial_Setup')) {
 
             <style type="text/css">
                 .ogpc-order-gift-btn .checkout-button {
-                    color: <?php echo (isset($btn_text_color) && !empty($btn_text_color)) ? $btn_text_color : '#7f54b3'; ?>
+                    color: <?php echo (isset($btn_text_color) && !empty($btn_text_color)) ? esc_html($btn_text_color) : '#7f54b3'; ?>
                 }
 
                 .ogpc-order-gift-btn .checkout-button {
-                    border-color: <?php echo (isset($btn_border_color) && !empty($btn_border_color)) ? $btn_border_color : '#7f54b3'; ?>
+                    border-color: <?php echo (isset($btn_border_color) && !empty($btn_border_color)) ? esc_html($btn_border_color) : '#7f54b3'; ?>
                 }
 
                 .ogpc-order-gift-btn .checkout-button {
-                    background-color: <?php echo (isset($btn_bg_color) && !empty($btn_bg_color)) ? $btn_bg_color : '#7f54b3'; ?>
+                    background-color: <?php echo (isset($btn_bg_color) && !empty($btn_bg_color)) ? esc_html($btn_bg_color) : '#7f54b3'; ?>
                 }
             </style>
         <?php }
@@ -98,7 +98,7 @@ if (! class_exists('Initial_Setup')) {
              * @Gift Pages Object
              */
             $form_page = wp_insert_post( $gift_checkout_proceed );
-            if( !is_wp_error( $form_page ) ){
+            if( !is_wp_error( $form_page ) ) {
                 ogpc_function()->update_text( 'gift_page_id', $form_page );
             }
         }

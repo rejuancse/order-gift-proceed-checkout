@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Order Gift Proceed Checkout
  * Description:       Order Gift Proceed Checkout is easily manage gift order in woocommerce platform. In this plugin you can easily handle order as a gift.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 5.9
  * Requires PHP:      7.2
  * Author:            Rejuan Ahamed
@@ -28,7 +28,7 @@ final class WC_Gift {
      *
      * @var string
      */
-    const version = '1.0';
+    const version = '1.0.2';
 
     /**
      * Class construcotr

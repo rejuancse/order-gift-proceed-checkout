@@ -5,7 +5,7 @@ Tags: woocommerce, Checkout, Gift Checkout, Gift Proceed, Order as a Gift
 Requires at least: 5.9
 Tested up to: 6.1
 Requires PHP: 7.2
-Stable tag:  1.0.1
+Stable tag:  1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,9 @@ A. Found a bug? Please let us know by posting on the support section of this plu
 
 
 == Changelog ==
+
+= 1.0.2 [09/03/2023] =
+* Variables and escaped issue fixed
 
 = 1.0.1 [04/03/2023] =
 * Variables and escaped issue fixed
